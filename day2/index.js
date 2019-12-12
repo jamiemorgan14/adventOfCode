@@ -103,21 +103,23 @@ let massArr = [
 
 function fuelRequired(num) {
     let division = num / 3;
-    let roundedDown = Math.floor(division);
-	return roundedDown - 2;
+    let requirement = Math.floor(division) - 2;
+	if (requirement > 2) {
+        requirement = fuelRequired(requirement)
+    }
+    return requirement
 }
 
 function addTotals(arr) {
     return arr.reduce((x, y) => x + y, 0)
-}  
+} 
 
 function findAllRequiredFuelTotals(arr) {
 	let modules = [];
     for (i = 0; i < arr.length; i++) {
-        modules.push(fuelRequired(arr[i]))
+        modules.push(fuelRequired(arr[i]));
     }
 	console.log(addTotals(modules));
 }
-
 
 findAllRequiredFuelTotals(massArr);
